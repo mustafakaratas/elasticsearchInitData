@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+
+  elasticsearch:
+    image: elasticsearch
+    build:
+      context: .
+      dockerfile: Dockerfile_elastic
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.9.1
+    volumes:
+      - ./kibana.yml:/usr/share/kibana/config/kibana.yml
+    ports:  
+      - "5601:5601"
+    depends_on:
+      - elasticsearch

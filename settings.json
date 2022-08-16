@@ -1,0 +1,15 @@
+{
+  "settings": {
+    "number_of_shards": 2,
+    "number_of_replicas": 2
+  },
+  "mappings": {
+    "properties": {
+      "name": { "type": "text" },
+      "surname": { "type": "text" }
+    }
+  },
+  "aliases": {
+    "alias-my-index": {}
+  }
+}

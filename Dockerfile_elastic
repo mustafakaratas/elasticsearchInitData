@@ -1,0 +1,15 @@
+FROM docker.elastic.co/elasticsearch/elasticsearch:7.9.1
+
+COPY ./elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml
+COPY ./docker-entrypoint.sh /docker-entrypoint.sh
+
+RUN mkdir utils
+COPY ./index.json /utils/index.json
+COPY ./settings.json /utils/settings.json
+
+USER root
+RUN chmod +x /docker-entrypoint.sh
+RUN chown -R elasticsearch:elasticsearch /docker-entrypoint.sh
+
+USER elasticsearch
+ENTRYPOINT ["/docker-entrypoint.sh"]
